@@ -1,12 +1,13 @@
 from django.http import JsonResponse
 
+
 class Response:
 
     def base(self, values=None, message="", status=200):
         if values is None:
-            values=[]
+            values = []
 
-        return JsonResponse( {
+        return JsonResponse({
             'values': values,
             'message': message
         }, status=status)
@@ -18,3 +19,7 @@ class Response:
     @staticmethod
     def bad_request(values=None, message=""):
         return Response().base(values=values, message=message, status=400)
+
+    @staticmethod
+    def unauthorized(values=None, message=""):
+        return Response().base(values=values, message='Unauthorized!', status=401)
