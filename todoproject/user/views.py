@@ -76,7 +76,7 @@ def show(request, id):
         user = Users.objects.filter(id=id).first()
 
         if not user:
-            return Response.bad_request(message='Pengguna tidak ditemukan!')
+            return Response.bad_request(message='User not found!')
 
         user.name = json_data['name']
         user.email = json_data['email']

@@ -31,3 +31,19 @@ def add_todo(request, user_id):
     else:
         return Response.bad_request(message='Invalid method!')
 
+def up_del_todo(request, user_id, task_id):
+    if request.method == 'PUT':
+        json_data = json.loads(request.body)
+
+        todo = Todo.objects.filter(id=task_id, user_id=user_id).first()
+
+        if not todo:
+            return Response.bad_request(message="Task not found!")
+
+        todo.task = json_data['task']
+        todo.user_id = user_id
+        todo.save()
+
+        return Response.ok(values=transformer.single_transform(todo),
+                           message='Task updated!')
+

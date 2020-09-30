@@ -1,5 +1,6 @@
 def single_transform(values):
     return {
+        'id': values.id,
         'task': values.task,
         'user_id': values.user_id
     }
