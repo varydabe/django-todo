@@ -38,8 +38,7 @@ def up_del_todo(request, user_id, task_id):
         if not todo:
             return Response.bad_request(message="Task not found!")
 
-        todo.task = json_data['task']
-        todo.user_id = user_id
+        todo = Todo(id=task_id, task=json_data['task'], user_id=user_id)
         todo.save()
 
         return Response.ok(values=transformer.single_transform(todo),
