@@ -2,10 +2,12 @@ from django.shortcuts import render
 from .models import Todo
 from . import transformer
 from todoproject.response import Response
+from todoproject.middleware import jwt_required
 import json
 
 
-# Create your views here.
+# Read todolist
+@jwt_required
 def view_todo(request, user_id):
     if request.method == 'GET':
         todo = Todo.objects.filter(user_id=user_id)
@@ -16,6 +18,8 @@ def view_todo(request, user_id):
         return Response.bad_request(message='Invalid method')
 
 
+# Add todolist
+@jwt_required
 def add_todo(request, user_id):
     if request.method == 'POST':
         json_data = json.loads(request.body)
@@ -29,6 +33,8 @@ def add_todo(request, user_id):
         return Response.bad_request(message='Invalid method!')
 
 
+# Update and delete todolist
+@jwt_required
 def up_del_todo(request, user_id, task_id):
     if request.method == 'PUT':
         json_data = json.loads(request.body)

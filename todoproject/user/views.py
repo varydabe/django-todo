@@ -22,16 +22,19 @@ def auth(request):
         user = Users.objects.filter(email=email).first()
 
         if not user:
-            return Response.bad_request(message='Pengguna tidak ditemukan')
+            return Response.bad_request(message='User not found!')
 
         if not check_password(json_data['password'], user.password):
-            return Response.bad_request('Password atau email salah!')
+            return Response.bad_request('Invalid email or password!')
 
         user = transformer.single_transform(user)
 
         jwt = JWTAuth()
         user['token'] = jwt.encode({"id": user['id']})
-        return Response.ok(values=user, message='Berhasil masuk!')
+        return Response.ok(values=user, message='Login success!')
+
+    else:
+        return Response.bad_request(message='Invalid Method!')
 
 
 @jwt_required
@@ -56,6 +59,8 @@ def index(request):
             values=transformer.single_transform(user),
             message="Added!"
         )
+    else:
+        return Response.bad_request(message='Invalid Method!')
 
 
 @jwt_required
@@ -65,7 +70,7 @@ def show(request, id):
         user = Users.objects.filter(id=id).first()
 
         if not user:
-            return Response.bad_request(message='Pengguna tidak ditemukan!')
+            return Response.bad_request(message='User not found!')
 
         user = transformer.single_transform(user)
         return Response.ok(values=user)
@@ -92,7 +97,7 @@ def show(request, id):
     elif request.method == 'DELETE':
         user = Users.objects.filter(id=id).first()
         if not user:
-            return Response.bad_request(message='Pengguna tidak ditemukan')
+            return Response.bad_request(message='User not found!')
 
         user.delete()
         return Response.ok(message='Deleted!')
