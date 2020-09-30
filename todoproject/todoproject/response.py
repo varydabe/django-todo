@@ -22,4 +22,4 @@ class Response:
 
     @staticmethod
     def unauthorized(values=None, message=""):
-        return Response().base(values=values, message='Unauthorized!', status=401)
+        return Response().base(values=values, message=message, status=401)

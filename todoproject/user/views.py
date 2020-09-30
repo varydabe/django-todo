@@ -1,6 +1,6 @@
 from django.contrib.auth.hashers import make_password, check_password
-from django.shortcuts import render
 import json
+from django.shortcuts import render
 from todoproject.jwt import JWTAuth
 from todoproject.response import Response
 from todoproject.middleware import jwt_required
@@ -9,9 +9,14 @@ from . import transformer
 
 
 # Create your views here.
+# def login(request):
+#    return render(request, 'login.html')
+
+
 def auth(request):
+    # User login
     if request.method == 'POST':
-        json_data = json.loads(request.body)
+        json_data = json.loads(request.body) #request.POST
         email = json_data['email']
 
         user = Users.objects.filter(email=email).first()
@@ -31,11 +36,13 @@ def auth(request):
 
 @jwt_required
 def index(request):
+    # Show all user
     if request.method == 'GET':
         user = Users.objects.all()
         user = transformer.transform(user)
         return Response.ok(values=user)
 
+    # Add user (Register)
     elif request.method == 'POST':
         json_data = json.loads(request.body)
 
@@ -53,6 +60,7 @@ def index(request):
 
 @jwt_required
 def show(request, id):
+    # Read user
     if request.method == 'GET':
         user = Users.objects.filter(id=id).first()
 
@@ -60,7 +68,9 @@ def show(request, id):
             return Response.bad_request(message='Pengguna tidak ditemukan!')
 
         user = transformer.single_transform(user)
-        return Response.bad_request(values=user)
+        return Response.ok(values=user)
+
+    # Update user
     elif request.method == 'PUT':
         json_data = json.loads(request.body)
         user = Users.objects.filter(id=id).first()
@@ -77,6 +87,8 @@ def show(request, id):
             values=transformer.single_transform(user),
             message="Updated!"
         )
+
+    # Delete user
     elif request.method == 'DELETE':
         user = Users.objects.filter(id=id).first()
         if not user:
