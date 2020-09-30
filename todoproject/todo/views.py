@@ -16,14 +16,11 @@ def view_todo(request, user_id):
         return Response.bad_request(message='Invalid method')
 
 
-def add_todo(request, user_id):
+def add_todo(request):
     if request.method == 'POST':
         json_data = json.loads(request.body)
 
-        todo = Todo()
-
-        todo.task = json_data['task']
-        todo.user = user_id
+        todo = Todo(task=json_data['task'], user_id=json_data['user_id'])
         todo.save()
 
         return Response.ok(values=transformer.single_transform(todo),
