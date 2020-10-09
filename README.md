@@ -1,5 +1,5 @@
 # Todolist
-Todolist with user login and JWTAuthe written in Python using Django framework.
+Todolist with user login and JWTAuth written in Python using Django framework.
 
 This is a mini project while I'm learning about Django framework and implemented REST API development.
 This project is considered finish (all basic functionality of todolist had been implemented), However there are some enhancements like Web UI, etc. that is nice to be implemented as well later.
