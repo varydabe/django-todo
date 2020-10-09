@@ -26,7 +26,7 @@ Running project:
 
 ### Migrations
 
-When running in Local, you need to run the db-migrations to setup the app's database for your local machine.
+When running in Local, you need to setup the app's database for your local machine.
 
 1. Go to directory `todoproject`.
 2. Open file .env and change `[YOUR_USERNAME]` and `[YOUR_PASSWORD]` to your database username and password.
