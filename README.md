@@ -14,15 +14,9 @@ These instructions will get you a copy of the project up and running on your loc
 2. Create and use a virtual environment and install dependencies.
  ```python
  mkvirtualenv venv
- \venv\Scripts\Activate
+ \venv\Scripts\Activate          #Windows User
  pip install -r requirements.txt
  ```
- 
-### Run Project
-
-Running project:
-
-`python manage.py runserver`
 
 ### Migrations
 
@@ -36,6 +30,12 @@ When running in Local, you need to setup the app's database for your local machi
 python ./manage.py syncdb
 python ./manage.py migrate
 ```
+
+### Run Project
+
+Running project:
+
+`python manage.py runserver`
 
 ## Directory Structure
 
