@@ -1,7 +1,7 @@
 # Todolist
 Todolist with user login and JWTAuth written in Python using Django framework.
 
-This is a mini project while I'm learning about Django framework and implemented REST API development.
+This is a mini project while I'm learning about Django framework and implemented REST API.
 This project is considered finish (all basic functionality of todolist had been implemented), However there are some enhancements like Web UI, etc. that is nice to be implemented as well later.
 
 ## Getting Started
@@ -43,8 +43,8 @@ This repository is organized in the following directory structure.
 
 ```
 django-todo
-|-- todo                                   # Contains todo App
-|   |-- migrations                         # Contains migrations for db
+|-- todo                                   # 
+|   |-- migrations                         # 
 |   |-- __init__                           #
 |   |-- admin                              #
 |   |-- apps                               #
@@ -53,8 +53,8 @@ django-todo
 |   |-- transformer                        #
 |   |-- urls                               #
 |   |-- views                              #
-|-- todoproject                            # Contains main project file
-|   |-- .env                               # Environtment setting
+|-- todoproject                            # 
+|   |-- .env                               # 
 |   |-- __init__                           #
 |   |-- asgi                               #
 |   |-- jwt                                #
@@ -63,9 +63,9 @@ django-todo
 |   |-- settings                           #
 |   |-- urls                               #
 |   |-- wsgi                               #
-|-- user                                   # Contains user App
-|   |-- migrations                         # Contains migrations for db
-|   |-- templates                          # templates for frontend (not used right now)
+|-- user                                   # 
+|   |-- migrations                         # 
+|   |-- templates                          # 
 |   |-- __init__                           #
 |   |-- admin                              #
 |   |-- apps                               #
