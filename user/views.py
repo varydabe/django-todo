@@ -9,11 +9,28 @@ from . import transformer
 
 
 # Create your views here.
-# def login(request):
-#    return render(request, 'login.html')
+
+def register(request):
+    # Add user (Register)
+    if request.method == 'POST':
+        json_data = json.loads(request.body)
+
+        user = Users()
+        user.name = json_data['name']
+        user.email = json_data['email']
+        user.password = make_password(password=json_data['password'])
+        user.save()
+
+        return Response.ok(
+            values=transformer.single_transform(user),
+            message="Added!"
+        )
+
+    else:
+        return Response.bad_request(message='Invalid Method!')
 
 
-def auth(request):
+def login(request):
     # User login
     if request.method == 'POST':
         json_data = json.loads(request.body) #request.POST
@@ -45,20 +62,6 @@ def index(request):
         user = transformer.transform(user)
         return Response.ok(values=user)
 
-    # Add user (Register)
-    elif request.method == 'POST':
-        json_data = json.loads(request.body)
-
-        user = Users()
-        user.name = json_data['name']
-        user.email = json_data['email']
-        user.password = make_password(password=json_data['password'])
-        user.save()
-
-        return Response.ok(
-            values=transformer.single_transform(user),
-            message="Added!"
-        )
     else:
         return Response.bad_request(message='Invalid Method!')
 

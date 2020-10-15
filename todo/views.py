@@ -6,22 +6,16 @@ from todoproject.middleware import jwt_required
 import json
 
 
-# Read todolist
 @jwt_required
-def view_todo(request, user_id):
+def view_add_todo(request, user_id):
+    # Read todolist
     if request.method == 'GET':
         todo = Todo.objects.filter(user_id=user_id)
         todo = transformer.transform(todo)
         return Response.ok(values=todo)
 
-    else:
-        return Response.bad_request(message='Invalid method')
-
-
-# Add todolist
-@jwt_required
-def add_todo(request, user_id):
-    if request.method == 'POST':
+    # Add todolist
+    elif request.method == 'POST':
         json_data = json.loads(request.body)
 
         todo = Todo(task=json_data['task'], user_id=user_id)
@@ -29,8 +23,10 @@ def add_todo(request, user_id):
 
         return Response.ok(values=transformer.single_transform(todo),
                            message='Task added successfully!')
+
     else:
-        return Response.bad_request(message='Invalid method!')
+        return Response.bad_request(message='Invalid method')
+
 
 
 # Update and delete todolist
