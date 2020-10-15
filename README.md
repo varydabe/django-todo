@@ -13,7 +13,7 @@ These instructions will get you a copy of the project up and running on your loc
 1. Clone repository: `git clone git@github.com:varydabe/django-todo.git`
 2. Create and use a virtual environment and install dependencies.
  ```python
- mkvirtualenv venv
+ virtualenv venv
  \venv\Scripts\Activate          #Windows User
  pip install -r requirements.txt
  ```
